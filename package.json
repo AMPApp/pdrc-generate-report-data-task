@@ -1,0 +1,52 @@
+{
+  "name": "@ampapps/pdrc-generate-report-data-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8.9.4"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "nyc --check-coverage --lines 85 --functions 95 --branches 75 --reporter=html --reporter=text ./node_modules/mocha/bin/mocha --exit test/*.js",
+    "format": "prettier --write app.js bin/task.js",
+    "lint": "eslint ./app.js ./bin/task.js--fix --cache",
+    "npm-check": "npm-check -i eslint* -i prettier* -i husky*",
+    "npm-check-update": "npm-check -i eslint* -i prettier* -i husky* -u",
+    "update-deps": "npm-check -u",
+    "precommit": "npm run npm-check && npm test && npm run docs && git add docs/* && lint-staged",
+    "docs": "docco-husky ./app.js ./bin/task.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ampapps/pdrc-db": "^1.3.0",
+    "@ampapps/pdrc-env": "^1.0.2",
+    "winston": "^2.4.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "docco-husky": "^0.3.3",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "mocha": "^5.0.4",
+    "npm-check": "^5.5.2",
+    "nyc": "^11.4.1",
+    "prettier": "^1.11.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix --cache",
+      "git add",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "docco_husky": {
+    "project_name": "PDRC-GENERATE-REPORT-DATA-TASK",
+    "show_timestamp": false
+  }
+}
