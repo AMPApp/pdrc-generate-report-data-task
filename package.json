@@ -14,7 +14,6 @@
     "npm-check": "npm-check -i eslint* -i prettier* -i husky*",
     "npm-check-update": "npm-check -i eslint* -i prettier* -i husky* -u",
     "update-deps": "npm-check -u",
-    "precommit": "npm run npm-check && npm test && npm run docs && git add docs/* && lint-staged",
     "docs": "docco-husky ./app.js ./bin/task.js"
   },
   "author": "",
