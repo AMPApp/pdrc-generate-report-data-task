@@ -13,11 +13,13 @@ module.exports = async() => {
 
         let cityData = {};
         for(const patient of patients){
-            const patientCity = patient.city;
-            if(cityData[patientCity]){
+            if(patient.type === 'patient'){
+              const patientCity = patient.city;
+              if(cityData[patientCity]){
                 cityData[patientCity] = cityData[patientCity] + 1;
-            }else{
+              }else{
                 cityData[patientCity] = 1;
+              }
             }
         }
 
@@ -25,12 +27,18 @@ module.exports = async() => {
 
         let zipCodeData = {};
         for(const patient of patients){
-            const patientzipCode = patient.zip;
-            if(zipCodeData[patientzipCode]){
-                zipCodeData[patientzipCode] = zipCodeData[patientzipCode] + 1;
-            }else{
-                zipCodeData[patientzipCode] = 1;
+          if(patient.type === 'patient') {
+            let patientzipCode = patient.zip;
+            // chop off zip with more than 5 chars
+            if(patientzipCode && patientzipCode.length > 5){
+              patientzipCode = patientzipCode.slice(0,5);
             }
+            if (zipCodeData[patientzipCode]) {
+              zipCodeData[patientzipCode] = zipCodeData[patientzipCode] + 1;
+            } else {
+              zipCodeData[patientzipCode] = 1;
+            }
+          }
         }
 
         await db.updateReportData('zipCodeBreakdown', zipCodeData);
