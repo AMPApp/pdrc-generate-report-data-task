@@ -13,7 +13,7 @@ module.exports = async() => {
 
         let cityData = {};
         for(const patient of patients){
-            if(patient.type === 'patient'){
+            if(patient.type === 'Patient' || patient.type === 'patient'){
               const patientCity = patient.city;
               if(cityData[patientCity]){
                 cityData[patientCity] = cityData[patientCity] + 1;
@@ -27,7 +27,7 @@ module.exports = async() => {
 
         let zipCodeData = {};
         for(const patient of patients){
-          if(patient.type === 'patient') {
+          if(patient.type === 'Patient' || patient.type === 'patient'){
             let patientzipCode = patient.zip;
             // chop off zip with more than 5 chars
             if(patientzipCode && patientzipCode.length > 5){
